@@ -6,7 +6,7 @@
         private $data;
         
         function __construct() {
-            $this->view = new ApiView();
+            $this->view = new ApiResponseHandler();
             $this->data = file_get_contents('php://input');
         }
 
