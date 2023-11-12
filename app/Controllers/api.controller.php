@@ -1,5 +1,6 @@
 <?php
-    require_once 'app/Views/api.view.php';
+    require_once(__DIR__ . '/../Views/api.responseHandler.php');
+
     
     abstract class ApiController {
         protected $view;

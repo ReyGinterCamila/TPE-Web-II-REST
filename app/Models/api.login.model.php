@@ -1,4 +1,5 @@
 <?php
+    require_once 'api.model.php';
     class UserModel extends Model
 {
     public function getByUsername($username)

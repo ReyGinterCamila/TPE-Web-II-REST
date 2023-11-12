@@ -1,6 +1,5 @@
 <?php
-
-    require_once "./libs/smarty/Smarty.class.php";
+    //require_once "./libs/smarty/Smarty.class.php";
 
     class ProductsView{
 
@@ -15,7 +14,7 @@
         }
         //REDIRECCIONA LAS CONSTANTES PARA RUTEO 
         function ShowLocation($action){
-            header("Location: ".BASE_URL.$action);
+            //header("Location: ".BASE_URL.$action);
         }
         //MUESTRA EL HOME
         function ShowHome($products, $categorys){

@@ -1,13 +1,13 @@
 <?php
-require_once "app/Models/api.categories.model.php";
-require_once "app/Models/api.products.model.php";
-require_once "app/Views/api.categories.view.php";
-require_once "app/Views/api.responseHandler.php";
-require_once "app/Views/api.products.view.php";
-require_once "app/Views/api.login.view.php";
-require_once "helpers/api.auth.helper.php";
+require_once 'api.controller.php';
+require_once (__DIR__ . '/../Models/api.categories.model.php');
+require_once(__DIR__ . '/../Models/api.products.model.php');
+require_once(__DIR__ . '/../Views/api.categories.view.php');
+require_once(__DIR__ . '/../Views/api.products.view.php');
+require_once(__DIR__ . '/../Views/api.responseHandler.php');
+require_once(__DIR__ . '/../helpers/api.auth.helper.php');
 
-class CategoriesController extends APIController{
+class CategoriesController extends ApiController{
         private $productsView;
         private $ApiResponseHandler;
         private $productosModel;
@@ -17,7 +17,6 @@ class CategoriesController extends APIController{
         private $authHelper;
 
         function __construct() {
-            parent::__construct();
             $this->productsView = new ProductsView();
             $this->ApiResponseHandler = new ApiResponseHandler();
             $this->productosModel = new ProductsModel();
