@@ -1,6 +1,6 @@
 <?php
     require_once 'app/Controllers/api.controller.php';
-    require_once 'helpers/auth.api.helper.php';
+    require_once(__DIR__ . '/../helpers/api.auth.helper.php');
     require_once 'app/Models/api.login.model.php';
 
     class LoginApiController extends ApiController {

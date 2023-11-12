@@ -1,12 +1,13 @@
 <?php
     require_once(__DIR__ . '/../../config.php');
+    require_once(__DIR__ . '/../../initial.php');
 
     class ProductsModel{
 
         private $db;
         //CONEXIÓN CON LA BDD
         function __construct() {
-            $this->db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+            $this->db = new PDO("mysql:host=" . HOST . ";dbname=" . NAME, USER, PASSWORD);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         }
         //OBTENGO PRODUCTOS

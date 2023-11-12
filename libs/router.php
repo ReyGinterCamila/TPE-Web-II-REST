@@ -41,7 +41,6 @@ class Route {
         (new $controller())->$method($params);
     }
 }
-
 class Router {
     private $routeTable = [];
     private $defaultRoute;

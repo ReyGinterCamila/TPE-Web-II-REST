@@ -1,10 +1,10 @@
 <?php
-require_once "app/View/api.products.view.php";
-require_once "app/View/api.responseHandle.view.php";
-require_once "app/Model/api.products.model.php";
-require_once "app/Model/app.categories.model.php";
-require_once "app/Controller/app.login.controller.php";
-require_once "helpers/api.auth.helper.php";
+    require_once 'api.login.controller.php';
+    require_once(__DIR__ . '/../Views/api.products.view.php');
+    require_once(__DIR__ . '/../Views/api.responseHandler.php');
+    require_once(__DIR__ . '/../Models/api.products.model.php');
+    require_once(__DIR__ . '/../Models/api.categories.model.php');
+    require_once(__DIR__ . '/../helpers/api.auth.helper.php');
 
 class ProductsController {
     private $productsModel;
