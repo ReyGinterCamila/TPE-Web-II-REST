@@ -13,7 +13,7 @@
             $this->model = new userModel();
         }
 
-        // obtiene un TOKEN de autenticación
+        // Obtener un TOKEN de autenticación
         function getToken($params = []) {
             $basic = $this->authHelper->getAuthHeaders();
 

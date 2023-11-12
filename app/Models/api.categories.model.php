@@ -4,7 +4,7 @@ class CategoriesModel {
     private $db;
     //CONEXIÓN CON LA BDD
     function __construct(){
-        $this->db = new PDO('mysql:host=localhost;dbname=articulos;charset=utf8', 'root', '');
+        //$this->db = new PDO('mysql:host=localhost;dbname=articulos;charset=utf8', 'root', '');
     }
     //OBTENGO CATEGORIAS
     function GetCategories($order, $sort){

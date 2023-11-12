@@ -1,34 +1,39 @@
 <?php
     require_once "app/View/api.products.view.php";
-    require_once "app/View/api.login.view.php";
+    require_once "app/View/api.responseHandle.view.php";
     require_once "app/Model/api.products.model.php";
     require_once "app/Model/app.categories.model.php";
-    require_once "app/Controller/app.login.montroller.php";
+    require_once "app/Controller/app.login.controller.php";
+    require_once "helpers/api.auth.helper.php";
 
     class ProductsController{
-
+        private $productsModel;
+        private $authHelper;
         private $view;
-        private $model;
         private $categorysModel;
-        private $loginView;
+        private $model;
         private $loginControl;
+        private $loginView;
 
-        function __construct(){
+        function __construct() {
+            $this->productsModel = new ProductsModel();
+            $this->authHelper = new AuthHelper();
             $this->view = new ProductsView();
-            $this->model = new ProductsModel();
-            $this->categorysModel = new CategorysModel();
             $this->loginView = new LoginView();
-            $this->loginControl = new LoginController();
+            $this->loginControl = new LoginApiController();
         }
+
         //LLAMA AL HOME
         function Home(){
-            $categorys = $this->categorysModel->GetCategorys();
+            $categorys = $this->categorysModel->GetCategories();
             $products = $this->model->GetProducts();
             $this->view->ShowHome($products, $categorys);
+            
         }
-        //INSERTA NUEVO PRODUCTO
-        function InsertProduct(){
-            $logueado = $this->loginControl->checkLoggedIn();
+
+        function create($params = []) {
+            $user = $this->authHelper->currentUser();
+            $logueado = $this->loginControl->getToken();
             if($logueado){
                 if ((!empty($_POST['input_product']) && !empty($_POST['input_description'])) && (!empty($_POST['input_material']) && !empty($_POST['input_price'])) && (!empty($_POST['input_stock']) && !empty($_POST['select_category']))) {
                     $product = $_POST['input_product'];
@@ -44,32 +49,9 @@
                 $this->loginView->ShowLogin();
             }
         }
-        //ELIMINA PRODUCTO POR ID
-        function DeleteProduct($params = null){
-            $logueado = $this->loginControl->checkLoggedIn();
-            if($logueado){
-                $product_id = $params[':ID'];
-                $this->model->DeleteProduct($product_id);
-                $this->view->ShowLocation('admin');
-            }else{
-                $this->loginView->ShowLogin();
-            }
-        }
-        //LLAMA LA VISTA PARA EDITAR UN PRODUCTO POR ID
-        function EditProduct($params = null){
-            $logueado = $this->loginControl->checkLoggedIn();
-            if($logueado){
-                $product_id = $params[':ID'];
-                $categorys = $this->categorysModel->GetCategorys();
-                $product = $this->model->GetProductById($product_id);
-                $this->view->ShowEditProduct($product, $categorys); 
-            }else{
-                $this->loginView->ShowLogin();
-            }
-        }
-        //LLAMA A ACTUALIZAR UN PRODUCTO
-        function UpdateProduct($params = null){
-            $logueado = $this->loginControl->checkLoggedIn();
+
+        function Update($params = null){
+            $logueado = $this->loginControl->getToken();
             if($logueado){
                 $product_id = $params[':ID'];
                 $product = $this->model->GetProductById($product_id);
@@ -87,13 +69,38 @@
             }else{
                 $this->loginView->ShowLogin();
             }
+        //ELIMINA PRODUCTO POR ID
+        function DeleteProduct($params = null){
+            $logueado = $this->loginControl->getToken();
+            if($logueado){
+                $product_id = $params[':ID'];
+                $this->model->DeleteProduct($product_id);
+                $this->view->ShowLocation('admin');
+            }else{
+                $this->loginView->ShowLogin();
+            }
+        }
+        //LLAMA LA VISTA PARA EDITAR UN PRODUCTO POR ID
+        function EditProduct($params = null){
+            $logueado = $this->loginControl->getToken();
+            if($logueado){
+                $product_id = $params[':ID'];
+                $categorys = $this->categorysModel->GetCategories();
+                $product = $this->model->GetProductById($product_id);
+                $this->view->ShowEditProduct($product, $categorys); 
+            }else{
+                $this->loginView->ShowLogin();
+            }
+        }
+        //LLAMA A ACTUALIZAR UN PRODUCTO
+        
         }
         //LLAMA AL FILTRO DE LOS PRODUCTOS POR CATEGORIA
         function FilterProductsByCategory(){
             if (isset($_POST['select_category'])) {
                 $category_id = $_POST['select_category'];
                 $products = $this->model->GetProductsByCategory($category_id);
-                $categorys = $this->categorysModel->GetCategorys();
+                $categorys = $this->categorysModel->GetCategories();
                 $this->view->ShowHome($products, $categorys);
             }
         }
@@ -105,5 +112,6 @@
             $category = $this->categorysModel->GetCategoryById($category_id);
             $this->view->ShowItemDetail($product, $category); 
         }
+    
     }
 ?>
