@@ -26,9 +26,8 @@ class CategoriesController extends APIController{
             $this->authHelper = new authHelper();
     }
 
-    function get($params = []) {
-  
-    if (empty($params)) {
+    function getAll($params = []) {
+        if (empty($params)) {
             $sort = 'id_categoria';
             $order = 'asc';
 
@@ -61,8 +60,8 @@ class CategoriesController extends APIController{
             }
         }
     }
-    // INSERTO NUEVA CATEGORIA
-    function InsertCategories($params = [])
+    // INSERTAR NUEVA CATEGORIA
+    function create($params = [])
     {
         $logueado = $this->loginControl->checkLoggedIn();
         if($logueado){
@@ -76,8 +75,8 @@ class CategoriesController extends APIController{
             }
         }
 
-    //ELIMINO CATEGORIA POR ID
-        function DeleteCategory($params = null){
+    // ELIMINAR CATEGORIA POR ID
+        function delete($params = null){
             $logueado = $this->loginControl->checkLoggedIn();
             if($logueado){
                 $category_id = $params[':ID'];
@@ -88,8 +87,8 @@ class CategoriesController extends APIController{
             }
         }
 
-    //LLAMA LA VISTA PARA EDITAR UNA CATEGORIA POR ID
-        function EditCategory($params = null){
+    //LLAMAR A LA VISTA PARA EDITAR UNA CATEGORIA POR ID
+        function edit($params = null){
             $logueado = $this->loginControl->checkLoggedIn();
             if($logueado){
                 $category_id = $params[':ID'];
@@ -100,8 +99,8 @@ class CategoriesController extends APIController{
             }
         }
 
-    // LLAMA A ACTUALIZAR UNA CATEGORIA
-    function UpdateCategories($params = [])
+    // LLAMAR A ACTUALIZAR UNA CATEGORIA
+    function update($params = [])
     {
         $logueado = $this->loginControl->checkLoggedIn();
             if($logueado){

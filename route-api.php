@@ -1,9 +1,8 @@
 <?php
-    require_once 'app/Controllers/api.products.controller.php';
-    require_once 'app/Controllers/api.categories.controller.php';
-    require_once 'app/Controllers/api.login.controller.php';
+    require_once 'app/Controller/api.products.controller.php';
+    require_once 'app/Controller/api.categorys.controller.php';
+    require_once 'app/Controller/api.login.controller.php';
     require_once 'libs/router.php';
-    require_once 'config.php';
     
     // CONSTANTES PARA RUTEO
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
@@ -18,14 +17,11 @@
     $r->addRoute("category", "GET", "CategorysController", "HomeCategorys");
     $r->addRoute("filterCategory", "POST", "ProductsController", "FilterProductsByCategory");
     $r->addRoute("itemDetail/:ID", "GET", "ProductsController", "ItemDetail");
-    /* //LOGIN
+    //LOGIN
     $r->addRoute("login", "GET", "LoginController", "Login");
     $r->addRoute("verify", "POST", "LoginController", "VerifyUser");
     $r->addRoute("admin", "GET", "LoginController", "ShowAdmin");
     $r->addRoute("logout", "GET", "LoginController", "Logout");
-    */
-    // TOKEN
-    $r->addRoute("login", "GET", "LoginApiController", "getToken");
     //PRODUCTOS
     $r->addRoute("insert", "POST", "ProductsController", "InsertProduct");
     $r->addRoute("delete/:ID", "GET", "ProductsController", "DeleteProduct"); 
